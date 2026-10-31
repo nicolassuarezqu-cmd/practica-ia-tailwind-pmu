@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121212">
+  <meta name="description" content="Barbería y micropigmentación profesional en Neiva, Huila. Agenda tu cita con Diana Quintero PMU Studio & Barbería.">
+  <title>Diana Quintero | PMU Studio & Barbería</title>
+  <link rel="icon" href="img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    try {
+      const savedTheme = localStorage.getItem('diana-theme');
+      if (savedTheme === 'light') document.documentElement.classList.remove('dark');
+      if (savedTheme === 'dark') document.documentElement.classList.add('dark');
+    } catch (error) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-ink: #121212;
+      --color-ink-soft: #181818;
+      --color-cream: #F5EDE3;
+      --color-gold: #C8955A;
+      --color-gold-dark: #8A5A1F;
+      --color-success: #22B573;
+      --color-error: #E5484D;
+      --color-error-dark: #B42318;
+      --color-warning: #F5A524;
+      --font-display: "Playfair Display", Georgia, serif;
+      --font-body: "Inter", sans-serif;
+    }
+
+    @custom-variant dark (&:where(.dark, .dark *));
+
+    :root {
+      color-scheme: light;
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+      font-family: var(--font-body);
+    }
+
+    :root.dark {
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-cream);
+      color: var(--color-ink);
+    }
+
+    .dark body {
+      background: var(--color-ink);
+      color: var(--color-cream);
+    }
+
+    .menu-panel {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-0.5rem);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    }
+
+    .menu-panel.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .service-card[hidden] {
+      display: none;
+    }
+
+    .faq-panel[hidden] {
+      display: none;
+    }
+
+    .toast {
+      opacity: 0;
+      transform: translateY(0.75rem);
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+  <style>
+    .filter-button[aria-pressed="true"],
+    .filter-button[aria-pressed="true"]:hover {
+      background-color: var(--color-gold);
+      border-color: var(--color-gold);
+      color: var(--color-ink);
+    }
+  </style>
+</head>
+<body class="font-body antialiased selection:bg-gold selection:text-ink">
+  <!-- Navegación principal -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-cream/10 bg-ink/95 text-cream backdrop-blur-md">
+    <nav class="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
+      <a href="#inicio" class="flex items-center gap-3 font-display text-base font-semibold leading-tight text-cream transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:text-lg">
+        <img src="img/logo.jpg" width="44" height="44" alt="Logo de Diana Quintero PMU Studio & Barbería" class="size-10 sm:size-11 rounded-full object-cover">
+        <span>Diana Quintero <span class="block font-body text-[0.62rem] font-medium uppercase tracking-[0.16em] text-gold sm:text-[0.68rem]">PMU Studio & Barbería</span></span>
+      </a>
+
+      <div class="hidden items-center gap-6 lg:flex">
+        <a href="#inicio" class="text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Inicio</a>
+        <a href="#servicios" class="text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Servicios</a>
+        <a href="#nosotros" class="text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Nosotros</a>
+        <a href="#preguntas" class="text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Preguntas</a>
+        <a href="#cita" class="text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Contacto</a>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="theme-toggle" type="button" class="inline-flex size-10 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-gold hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold" aria-label="Cambiar a modo claro" title="Cambiar tema">
+          <svg class="hidden size-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+          <svg class="size-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+        </button>
+        <a href="#cita" class="hidden rounded-sm bg-gold px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:inline-flex">Agendar cita</a>
+        <button id="menu-toggle" type="button" class="inline-flex size-10 items-center justify-center rounded-sm border border-cream/20 text-cream transition-colors hover:border-gold hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="menu-icon" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="menu-panel absolute inset-x-0 top-full border-b border-cream/10 bg-ink px-5 pb-5 pt-2 shadow-xl lg:hidden" aria-hidden="true">
+      <div class="mx-auto flex max-w-7xl flex-col">
+        <a href="#inicio" class="border-b border-cream/10 py-3 text-sm text-cream/85 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold">Inicio</a>
+        <a href="#servicios" class="border-b border-cream/10 py-3 text-sm text-cream/85 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold">Servicios</a>
+        <a href="#nosotros" class="border-b border-cream/10 py-3 text-sm text-cream/85 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold">Nosotros</a>
+        <a href="#preguntas" class="border-b border-cream/10 py-3 text-sm text-cream/85 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold">Preguntas frecuentes</a>
+        <a href="#cita" class="border-b border-cream/10 py-3 text-sm text-cream/85 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold">Contacto</a>
+        <a href="#cita" class="mt-4 inline-flex justify-center rounded-sm bg-gold px-4 py-3 text-sm font-semibold text-ink transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">Agendar cita</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Portada -->
+    <section id="inicio" class="relative flex min-h-[88svh] items-end overflow-hidden bg-ink pt-24 text-cream sm:min-h-[92svh]">
+      <img src="img/hero.jpg" alt="Barbero trabajando con un cliente" class="absolute inset-0 size-full object-cover object-[62%_center]" fetchpriority="high">
+      <div class="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/75 via-80% to-ink/25"></div>
+      <div class="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-16 sm:px-8 sm:pb-24 lg:px-10 lg:pb-32">
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gold sm:text-sm">Neiva, Huila <span class="mx-2 text-cream/70">/</span> Imagen personal</p>
+        <h1 class="max-w-3xl font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-7xl">Tu estilo, con <span class="text-gold">intención.</span></h1>
+        <p class="mt-6 max-w-[18rem] text-base leading-7 text-cream/85 sm:max-w-[24rem] sm:text-lg sm:leading-8 md:max-w-xl">Barbería y micropigmentación profesional para resaltar lo que te hace único, con técnica, detalle y atención personalizada.</p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="#servicios" class="inline-flex min-h-12 items-center justify-center rounded-sm border border-cream/60 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-gold hover:bg-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">Ver servicios</a>
+          <a href="#cita" class="inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">Agendar cita</a>
+        </div>
+      </div>
+      <div class="absolute bottom-8 right-5 hidden border-l border-gold bg-ink/75 py-2 pl-4 pr-3 text-xs uppercase tracking-[0.18em] text-cream/70 md:block lg:right-10">Belleza en cada detalle</div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="bg-cream py-20 text-ink dark:bg-ink dark:text-cream sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div class="flex flex-col justify-between gap-7 md:flex-row md:items-end">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark dark:text-gold">Servicios</p>
+            <h2 class="mt-3 font-display text-3xl font-medium sm:text-4xl">Un cuidado hecho a tu medida</h2>
+            <p class="mt-4 max-w-2xl text-sm leading-6 text-ink/70 dark:text-cream/70 sm:text-base">Técnicas profesionales para tu estilo, desde un corte preciso hasta una micropigmentación sutil y natural.</p>
+          </div>
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar servicios">
+            <button type="button" class="filter-button rounded-sm border border-ink/20 px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-gold hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:border-cream/25 dark:text-cream dark:hover:text-gold" data-filter="all" aria-pressed="true">Todos</button>
+            <button type="button" class="filter-button rounded-sm border border-ink/20 px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-gold hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:border-cream/25 dark:text-cream dark:hover:text-gold" data-filter="barberia" aria-pressed="false">Barbería</button>
+            <button type="button" class="filter-button rounded-sm border border-ink/20 px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-gold hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:border-cream/25 dark:text-cream dark:hover:text-gold" data-filter="pmu" aria-pressed="false">Micropigmentación</button>
+          </div>
+        </div>
+
+        <div id="service-grid" class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="barberia">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85" alt="Barbero realizando un corte de cabello con máquina" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Barbería</p><h3 class="mt-2 font-display text-2xl">Corte de cabello</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Un corte preciso y personalizado para complementar tu estilo.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="barberia">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=85" alt="Detalle de herramientas de barbería para cuidado de barba" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Barbería</p><h3 class="mt-2 font-display text-2xl">Corte de barba</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Perfilado y definición para una barba cuidada y armoniosa.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="barberia">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=85" alt="Servicio de afeitado clásico en una barbería" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Barbería</p><h3 class="mt-2 font-display text-2xl">Afeitado</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Un acabado limpio con atención en cada detalle.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="pmu">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1783013951101-2d9ed3eac234?auto=format&fit=crop&w=900&q=85" alt="Especialista perfilando una ceja con una herramienta de precisión" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Micropigmentación</p><h3 class="mt-2 font-display text-2xl">Microblading</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Cejas naturales y definidas, diseñadas para armonizar tu rostro.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="pmu">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1588683301867-c442a9ed1389?auto=format&fit=crop&w=900&q=85" alt="Primer plano de un ojo maquillado con delineado oscuro" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Micropigmentación</p><h3 class="mt-2 font-display text-2xl">Eyeliner</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Realza la mirada con una definición precisa y adaptada a ti.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="pmu">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1676439977206-b5ffdfc03da2?auto=format&fit=crop&w=900&q=85" alt="Mujer aplicando color en sus labios" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Micropigmentación</p><h3 class="mt-2 font-display text-2xl">Lip blush</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Color y apariencia de volumen naturales para tus labios.</p></div>
+          </article>
+          <article class="service-card group overflow-hidden border border-ink/10 bg-white/70 transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl dark:border-cream/10 dark:bg-white/[0.03]" data-category="pmu">
+            <div class="aspect-[4/3] overflow-hidden"><img src="https://images.unsplash.com/photo-1775135679627-4fcd4bb41dfd?auto=format&fit=crop&w=900&q=85" alt="Artista trabajando con máquina sobre la cabeza de un cliente" class="size-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"></div>
+            <div class="p-5 sm:p-6"><p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-dark dark:text-gold">Micropigmentación</p><h3 class="mt-2 font-display text-2xl">Scalp micropigmentation</h3><p class="mt-3 text-sm leading-6 text-ink/70 dark:text-cream/70">Efecto de densidad capilar con una apariencia realista.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre el estudio -->
+    <section id="nosotros" class="border-y border-ink/10 bg-white/60 text-ink dark:border-cream/10 dark:bg-ink-soft dark:text-cream">
+      <div class="mx-auto grid max-w-7xl grid-cols-1 px-5 sm:px-8 md:grid-cols-2 lg:px-10">
+        <div class="relative min-h-72 overflow-hidden md:min-h-[34rem]">
+          <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=85" alt="Espacio de estudio de belleza preparado para atender a sus clientes" class="absolute inset-0 size-full object-cover" loading="lazy">
+        </div>
+        <div class="flex items-center py-14 sm:py-16 md:pl-10 md:pr-0 lg:pl-16">
+          <div class="max-w-xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark dark:text-gold">Nosotros</p>
+            <h2 class="mt-3 font-display text-3xl font-medium sm:text-4xl">Profesionalismo que se nota. Atención que se siente.</h2>
+            <p class="mt-6 text-sm leading-7 text-ink/75 dark:text-cream/75 sm:text-base">En Diana Quintero PMU Studio & Barbería, cada servicio comienza escuchando lo que buscas. Combinamos experiencia, técnica y cuidado por los detalles para crear una experiencia cómoda y personalizada.</p>
+            <p class="mt-4 text-sm leading-7 text-ink/75 dark:text-cream/75 sm:text-base">Nuestro compromiso es ayudarte a sentirte bien con tu imagen, con recomendaciones honestas y un espacio pensado para tu bienestar. Texto de ejemplo: personaliza aquí la historia real del estudio y la experiencia profesional de Diana.</p>
+            <a href="#cita" class="mt-8 inline-flex items-center gap-3 border-b border-gold-dark pb-2 text-sm font-semibold text-gold-dark transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold dark:border-gold dark:text-gold dark:hover:text-cream">Conoce nuestros servicios <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section id="preguntas" class="bg-cream py-20 text-ink dark:bg-ink dark:text-cream sm:py-24">
+      <div class="mx-auto max-w-4xl px-5 sm:px-8">
+        <div class="mb-9 text-center">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark dark:text-gold">Preguntas frecuentes</p>
+          <h2 class="mt-3 font-display text-3xl font-medium sm:text-4xl">Antes de tu cita</h2>
+        </div>
+        <div class="divide-y divide-ink/15 border-y border-ink/15 dark:divide-cream/15 dark:border-cream/15">
+          <div class="faq-item">
+            <h3><button type="button" class="faq-toggle flex w-full items-center justify-between gap-5 py-5 text-left font-semibold transition-colors hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:hover:text-gold" aria-expanded="false" aria-controls="faq-panel-1"><span>¿Cuánto dura el resultado del microblading?</span><span class="faq-mark text-xl text-gold-dark dark:text-gold" aria-hidden="true">+</span></button></h3>
+            <div id="faq-panel-1" class="faq-panel pb-5 pr-8 text-sm leading-6 text-ink/70 dark:text-cream/70" hidden>La duración puede variar según el tipo de piel, los cuidados y el estilo de vida. En la valoración te daremos una recomendación personalizada.</div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-toggle flex w-full items-center justify-between gap-5 py-5 text-left font-semibold transition-colors hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:hover:text-gold" aria-expanded="false" aria-controls="faq-panel-2"><span>¿El procedimiento de micropigmentación duele?</span><span class="faq-mark text-xl text-gold-dark dark:text-gold" aria-hidden="true">+</span></button></h3>
+            <div id="faq-panel-2" class="faq-panel pb-5 pr-8 text-sm leading-6 text-ink/70 dark:text-cream/70" hidden>La sensación es distinta para cada persona y depende del procedimiento. Antes de empezar conversaremos sobre tus dudas y expectativas.</div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-toggle flex w-full items-center justify-between gap-5 py-5 text-left font-semibold transition-colors hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:hover:text-gold" aria-expanded="false" aria-controls="faq-panel-3"><span>¿Qué cuidados debo tener después del procedimiento?</span><span class="faq-mark text-xl text-gold-dark dark:text-gold" aria-hidden="true">+</span></button></h3>
+            <div id="faq-panel-3" class="faq-panel pb-5 pr-8 text-sm leading-6 text-ink/70 dark:text-cream/70" hidden>Los cuidados dependen del servicio realizado. Recibirás indicaciones específicas para tu caso; sigue esas recomendaciones y comunícate con el estudio si tienes inquietudes.</div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-toggle flex w-full items-center justify-between gap-5 py-5 text-left font-semibold transition-colors hover:text-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold dark:hover:text-gold" aria-expanded="false" aria-controls="faq-panel-4"><span>¿Cómo puedo agendar una cita?</span><span class="faq-mark text-xl text-gold-dark dark:text-gold" aria-hidden="true">+</span></button></h3>
+            <div id="faq-panel-4" class="faq-panel pb-5 pr-8 text-sm leading-6 text-ink/70 dark:text-cream/70" hidden>Completa el formulario de esta página con tus datos y el servicio que te interesa. La solicitud queda lista para confirmar cuando se conecte un canal de recepción.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de cita -->
+    <section id="cita" class="bg-white/60 py-20 text-ink dark:bg-ink-soft dark:text-cream sm:py-24">
+      <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-10">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark dark:text-gold">Agenda</p>
+          <h2 class="mt-3 font-display text-3xl font-medium sm:text-4xl">Hablemos de tu próxima cita</h2>
+          <p class="mt-5 max-w-md text-sm leading-7 text-ink/70 dark:text-cream/70 sm:text-base">Cuéntanos qué servicio te interesa y qué fecha prefieres. Te ayudaremos a encontrar el mejor momento.</p>
+          <p class="mt-5 max-w-md border-l-2 border-warning pl-4 text-xs leading-5 text-ink/65 dark:text-cream/65">Formulario de demostración: las solicitudes se validan en esta página, pero aún no se envían ni almacenan. Conecta un servicio de reservas para recibirlas.</p>
+        </div>
+
+        <form id="appointment-form" class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2" novalidate>
+          <div>
+            <label for="name" class="mb-2 block text-sm font-medium">Nombre <span class="text-error-dark dark:text-error" aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required class="w-full rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold" aria-describedby="name-error">
+            <p id="name-error" class="mt-1 min-h-5 text-xs text-error-dark dark:text-error" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="email" class="mb-2 block text-sm font-medium">Correo electrónico <span class="text-error-dark dark:text-error" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required class="w-full rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold" aria-describedby="email-error">
+            <p id="email-error" class="mt-1 min-h-5 text-xs text-error-dark dark:text-error" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="phone" class="mb-2 block text-sm font-medium">Teléfono <span class="text-error-dark dark:text-error" aria-hidden="true">*</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold" aria-describedby="phone-error">
+            <p id="phone-error" class="mt-1 min-h-5 text-xs text-error-dark dark:text-error" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="service" class="mb-2 block text-sm font-medium">Servicio <span class="text-error-dark dark:text-error" aria-hidden="true">*</span></label>
+            <select id="service" name="service" required class="w-full rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold" aria-describedby="service-error">
+              <option value="">Selecciona un servicio</option>
+              <option>Corte de cabello</option>
+              <option>Corte de barba</option>
+              <option>Afeitado</option>
+              <option>Microblading</option>
+              <option>Eyeliner</option>
+              <option>Lip blush</option>
+              <option>Scalp micropigmentation</option>
+            </select>
+            <p id="service-error" class="mt-1 min-h-5 text-xs text-error-dark dark:text-error" aria-live="polite"></p>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="date" class="mb-2 block text-sm font-medium">Fecha preferida <span class="text-error-dark dark:text-error" aria-hidden="true">*</span></label>
+            <input id="date" name="date" type="date" required class="w-full rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold" aria-describedby="date-error">
+            <p id="date-error" class="mt-1 min-h-5 text-xs text-error-dark dark:text-error" aria-live="polite"></p>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="comments" class="mb-2 block text-sm font-medium">Comentarios <span class="text-xs font-normal text-ink/60 dark:text-cream/60">(opcional)</span></label>
+            <textarea id="comments" name="comments" rows="4" class="w-full resize-y rounded-sm border border-ink/20 bg-cream px-4 py-3 text-sm text-ink outline-none transition focus:border-gold-dark focus:ring-2 focus:ring-gold/30 dark:border-cream/20 dark:bg-ink dark:text-cream dark:focus:border-gold"></textarea>
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:w-auto">Enviar solicitud</button>
+            <p class="mt-3 text-xs text-ink/60 dark:text-cream/60">Los campos marcados con * son obligatorios.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="bg-ink py-12 text-cream">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-9 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-10">
+      <div class="sm:col-span-2">
+        <img src="img/logo.jpg" width="56" height="56" alt="Logo de Diana Quintero PMU Studio & Barbería" class="mb-4 size-14 rounded-full object-cover">
+        <a href="#inicio" class="font-display text-xl text-cream transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">Diana Quintero</a>
+        <p class="mt-1 text-xs uppercase tracking-[0.16em] text-gold">PMU Studio & Barbería</p>
+        <p class="mt-4 max-w-sm text-sm leading-6 text-cream/65">Cuidado personal y micropigmentación profesional en Neiva, Huila.</p>
+      </div>
+      <div>
+        <h2 class="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Contacto</h2>
+        <a href="tel:+573102222349" class="mt-4 block text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">310 222 2349</a>
+        <a href="https://www.instagram.com/diana_quinteropmu/" target="_blank" rel="noopener noreferrer" class="mt-2 block text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">Instagram: @diana_quinteropmu</a>
+        <a href="https://www.facebook.com/DianaQuintero" target="_blank" rel="noopener noreferrer" class="mt-2 block text-sm text-cream/80 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">Facebook: DianaQuintero</a>
+      </div>
+      <div>
+        <h2 class="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Visítanos</h2>
+        <p class="mt-4 text-sm leading-6 text-cream/80">Dirección de ejemplo<br>Neiva, Huila, Colombia</p>
+        <p class="mt-3 text-sm leading-6 text-cream/80">Horario de ejemplo<br>Lunes a sábado, con cita previa</p>
+      </div>
+    </div>
+    <div class="mx-auto mt-10 max-w-7xl border-t border-cream/10 px-5 pt-6 text-xs text-cream/55 sm:px-8 lg:px-10">
+      <p>&copy; <span id="current-year"></span> Diana Quintero PMU Studio & Barbería. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Confirmación accesible del formulario -->
+  <div id="toast" class="toast fixed bottom-5 left-5 right-5 z-[60] mx-auto max-w-md rounded-sm border border-success/40 bg-success px-5 py-4 text-sm font-medium text-ink shadow-xl sm:left-auto sm:right-6" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Interacciones de la página -->
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    themeToggle.setAttribute('aria-label', root.classList.contains('dark') ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark');
+      themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+      try {
+        localStorage.setItem('diana-theme', isDark ? 'dark' : 'light');
+      } catch (error) {
+        // La preferencia de tema seguirá funcionando durante esta visita.
+      }
+    });
+
+    function setMenuOpen(isOpen) {
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+      mobileMenu.classList.toggle('is-open', isOpen);
+      menuIcon.innerHTML = isOpen
+        ? '<path d="m6 6 12 12M18 6 6 18"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
+
+    document.querySelectorAll('.filter-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const selectedFilter = button.dataset.filter;
+        document.querySelectorAll('.filter-button').forEach((filterButton) => {
+          filterButton.setAttribute('aria-pressed', String(filterButton === button));
+        });
+
+        document.querySelectorAll('.service-card').forEach((card) => {
+          card.hidden = selectedFilter !== 'all' && card.dataset.category !== selectedFilter;
+        });
+      });
+    });
+
+    document.querySelectorAll('.faq-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const panel = document.getElementById(button.getAttribute('aria-controls'));
+        button.setAttribute('aria-expanded', String(!isExpanded));
+        panel.hidden = isExpanded;
+        button.querySelector('.faq-mark').textContent = isExpanded ? '+' : '\u2212';
+      });
+    });
+
+    const appointmentForm = document.getElementById('appointment-form');
+    const requiredFields = ['name', 'email', 'phone', 'service', 'date'];
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function hoyLocal() {
+      const now = new Date();
+      now.setTime(now.getTime() - now.getTimezoneOffset() * 60000);
+      return now.toISOString().slice(0, 10);
+    }
+
+    function showFieldError(field, message) {
+      const errorElement = document.getElementById(`${field.id}-error`);
+      errorElement.textContent = message;
+      field.setAttribute('aria-invalid', String(Boolean(message)));
+    }
+
+    appointmentForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let firstInvalidField = null;
+
+      requiredFields.forEach((fieldId) => {
+        const field = document.getElementById(fieldId);
+        let message = '';
+
+        if (!field.value.trim()) {
+          message = 'Este campo es obligatorio.';
+        } else if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())) {
+          message = 'Ingresa un correo electrónico válido.';
+        } else if (field.type === 'date' && field.value < hoyLocal()) {
+          message = 'Selecciona una fecha de hoy o posterior.';
+        }
+
+        showFieldError(field, message);
+        if (message && !firstInvalidField) firstInvalidField = field;
+      });
+
+      if (firstInvalidField) {
+        firstInvalidField.focus();
+        return;
+      }
+
+      toast.textContent = 'Formulario validado. Este demo aún no envía la solicitud; conecta un servicio de reservas para recibirla.';
+      toast.classList.add('is-visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 4000);
+      appointmentForm.reset();
+      requiredFields.forEach((fieldId) => showFieldError(document.getElementById(fieldId), ''));
+    });
+
+    requiredFields.forEach((fieldId) => {
+      const field = document.getElementById(fieldId);
+      field.addEventListener('input', () => showFieldError(field, ''));
+      field.addEventListener('change', () => showFieldError(field, ''));
+    });
+
+    document.getElementById('date').min = hoyLocal();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
